@@ -1,12 +1,22 @@
-﻿'use strict';
+'use strict';
 module.exports = function(grunt) {
-  // 配置Grunt各种模块的参数
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    conf: {
+      date: '<%= grunt.template.today("yyyymmdd") %>',
+      less: '<%= conf.date %>/less',
+      css: '<%= conf.date %>/css',
+      js: '<%= conf.date %>/js',
+      images: '<%= conf.date %>/images'
+    },
+    mkdir: {
+      all: {
+        options: {
+          create: ['<%= conf.less %>','<%= conf.css %>','<%= conf.js %>','<%= conf.images %>']
+        },
+      },
+    }
   });
-  // 从node_modules目录加载模块文件
-  //grunt.loadNpmTasks('grunt-contrib-jade');
-  //grunt.loadNpmTasks('grunt-contrib-less');
-  // 每行registerTask定义一个任务
-  //grunt.registerTask('default', ['jade', 'less']);
+  grunt.loadNpmTasks('grunt-mkdir');
+  grunt.registerTask('default',['mkdir']);
 };
