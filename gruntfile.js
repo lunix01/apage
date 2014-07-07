@@ -51,8 +51,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks('grunt-contrib-less');
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
   // 每行registerTask定义一个任务
-  grunt.registerTask('default',['mkdir','copy','jade','less');
-  grunt.registerTask('apage',['mkdir','copy','jade','less');
+  grunt.registerTask('default',['mkdir','copy','jade','less']);
+  grunt.registerTask('apage',['mkdir','copy','jade','less']);
 };
