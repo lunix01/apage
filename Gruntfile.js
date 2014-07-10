@@ -44,6 +44,15 @@ module.exports = function(grunt) {
           "<%= conf.date %>/css/style.css": "<%= conf.date %>/less/style.less"
         }
       }
+    },
+    cssmin: {
+      minify: {
+        expand: true,
+        cwd: '<%= conf.date %>/css/',
+        src: ['*.css', '!*.min.css'],
+        dest: '<%= conf.date %>/css/',
+        ext: '.min.css'
+      }
     }
   });
   // 从node_modules目录加载模块文件
@@ -51,7 +60,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
   // 每行registerTask定义一个任务
-  grunt.registerTask('default',['mkdir','copy','jade','less']);
-  grunt.registerTask('apage',['mkdir','copy','jade','less']);
+  grunt.registerTask('default',['mkdir','copy','jade','less','cssmin']);
+  grunt.registerTask('apage',  ['mkdir','copy','jade','less','cssmin']);
 };
