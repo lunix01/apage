@@ -14,12 +14,12 @@ module.exports = function(grunt) {
       less: '<%= conf.date %>/less',
       css: '<%= conf.date %>/css',
       js: '<%= conf.date %>/js',
-      images: '<%= conf.date %>/images'
+      image: '<%= conf.date %>/image'
     },
     mkdir: {
       all: {
         options: {
-          create: ['<%= conf.less %>','<%= conf.css %>','<%= conf.js %>','<%= conf.images %>']
+          create: ['<%= conf.less %>','<%= conf.css %>','<%= conf.js %>','<%= conf.image %>']
         },
       },
     },
