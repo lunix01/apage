@@ -65,6 +65,16 @@ module.exports = function(grunt) {
         }
       }
     },
+    uglify: {
+      options: {
+        mangle: false
+      },
+      my_target: {
+        files: {
+          '<%= conf.date %>/js/js.js': ['<%= conf.date %>/js/js.js']
+        }
+      }
+    },
     watch: {
       jade: {
         files: ['<%= conf.date %>/*.jade'],
@@ -93,6 +103,13 @@ module.exports = function(grunt) {
         options: {
           livereload: true,
         }
+      },
+      uglify: {
+        files: ['<%= conf.date %>/js/*.js'],
+        tasks: ['uglify'],
+        options: {
+          livereload: true,
+        }
       }
     }
   });
@@ -102,8 +119,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   // 每行registerTask定义一个任务
-  grunt.registerTask('default',['jade','less','cssmin','babel','watch']);
-  grunt.registerTask('apage',  ['mkdir','copy','jade','less','cssmin','babel','watch']);
+  grunt.registerTask('default', ['jade','less','cssmin','babel','uglify','watch']);
+  grunt.registerTask('apage', ['mkdir','copy','jade','less','cssmin','babel','uglify','watch']);
 };
