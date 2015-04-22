@@ -6,6 +6,7 @@
 */
 'use strict';
 module.exports = function(grunt) {
+  require("load-grunt-tasks")(grunt); // babel
   // 配置Grunt各种模块的参数
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -13,21 +14,22 @@ module.exports = function(grunt) {
       date: '<%= grunt.template.today("yyyymmdd") %>',
       less: '<%= conf.date %>/less',
       css: '<%= conf.date %>/css',
+      image: '<%= conf.date %>/image',
       js: '<%= conf.date %>/js',
-      image: '<%= conf.date %>/image'
+      es: '<%= conf.date %>/es'
     },
     mkdir: {
       all: {
         options: {
-          create: ['<%= conf.less %>','<%= conf.css %>','<%= conf.js %>','<%= conf.image %>']
-        },
-      },
+          create: ['<%= conf.less %>','<%= conf.css %>','<%= conf.image %>','<%= conf.js %>','<%= conf.es %>']
+        }
+      }
     },
     copy: {
       main: {
         files: [
-          {expand: true, src: ['index.jade'], dest: '<%= conf.date %>/', filter: 'isFile'},
-          {expand: true, src: ['style.less'], dest: '<%= conf.date %>/less/', filter: 'isFile'},
+          {src: ['index.jade'], dest: '<%= conf.date %>/index.jade'},
+          {src: ['style.less'], dest: '<%= conf.date %>/less/style.less'},
         ]
       },
     },
@@ -46,12 +48,51 @@ module.exports = function(grunt) {
       }
     },
     cssmin: {
-      minify: {
-        expand: true,
-        cwd: '<%= conf.date %>/css/',
-        src: ['*.css', '!*.min.css'],
-        dest: '<%= conf.date %>/css/',
-        ext: '.min.css'
+      options: {
+        shorthandCompacting: false,
+        roundingPrecision: -1
+      },
+      target: {
+        files: {
+          '<%= conf.date %>/css/style.css': ['<%= conf.date %>/css/style.css']
+        }
+      }
+    },
+    babel: {
+      dist: {
+        files: {
+          "<%= conf.date %>/js/js.js": "<%= conf.date %>/es/*.js"
+        }
+      }
+    },
+    watch: {
+      jade: {
+        files: ['<%= conf.date %>/*.jade'],
+        tasks: ['jade'],
+        options: {
+          livereload: true
+        }
+      },
+      less: {
+        files: ['<%= conf.date %>/less/*.less'],
+        tasks: ['less'],
+        options: {
+          livereload: true
+        }
+      },
+      cssmin: {
+        files: ['<%= conf.date %>/css/*.css'],
+        tasks: ['cssmin'],
+        options: {
+          livereload: true
+        }
+      },
+      babel: {
+        files: ['<%= conf.date %>/es/*.js'],
+        tasks: ['babel'],
+        options: {
+          livereload: true,
+        }
       }
     }
   });
@@ -61,7 +102,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-watch');
   // 每行registerTask定义一个任务
-  grunt.registerTask('default',['mkdir','copy','jade','less','cssmin']);
-  grunt.registerTask('apage',  ['mkdir','copy','jade','less','cssmin']);
+  grunt.registerTask('default',['jade','less','cssmin','babel','watch']);
+  grunt.registerTask('apage',  ['mkdir','copy','jade','less','cssmin','babel','watch']);
 };
