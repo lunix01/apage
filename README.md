@@ -7,4 +7,4 @@
 ##使用
   npm install
   然后，
-  grunt或grunt apage
+  grunt apage
