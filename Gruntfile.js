@@ -40,6 +40,13 @@ module.exports = function(grunt) {
         }
       }
     },
+    prettify: {
+      html: {
+        files: {
+          "<%= conf.date %>/index.html": "<%= conf.date %>/index.html"
+        }
+      }
+    },
     less: {
       production: {
         files: {
@@ -83,6 +90,13 @@ module.exports = function(grunt) {
           livereload: true
         }
       },
+      prettify: {
+        files: ['<%= conf.date %>/*.html'],
+        tasks: ['prettify'],
+        options: {
+          livereload: true,
+        }
+      },
       less: {
         files: ['<%= conf.date %>/less/*.less'],
         tasks: ['less'],
@@ -117,11 +131,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mkdir');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jade');
+  grunt.loadNpmTasks('grunt-prettify');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   // 每行registerTask定义一个任务
-  grunt.registerTask('default', ['jade','less','cssmin','babel','uglify','watch']);
-  grunt.registerTask('apage', ['mkdir','copy','jade','less','cssmin','babel','uglify','watch']);
+  grunt.registerTask('default', ['jade','prettify','less','cssmin','babel','uglify','watch']);
+  grunt.registerTask('apage', ['mkdir','copy','jade','prettify','less','cssmin','babel','uglify','watch']);
 };
