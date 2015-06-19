@@ -35,6 +35,6 @@ gulp.task('js', function() {
 });
 gulp.task('default', ['jade','less','js']);
 
-gulp.watch('./p/src/jade/*.jade', ['jade'])
+gulp.watch('./p/src/jade/*.jade', ['jade']);
 gulp.watch('./p/src/less/*.less', ['less']);
 gulp.watch('./p/src/es/*.js', ['js']);
