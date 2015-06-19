@@ -33,8 +33,10 @@ gulp.task('js', function() {
     .pipe(uglify())
     .pipe(gulp.dest('./p/build/js'))
 });
-gulp.task('default', ['jade','less','js']);
-
-gulp.watch('./p/src/jade/*.jade', ['jade']);
-gulp.watch('./p/src/less/*.less', ['less']);
-gulp.watch('./p/src/es/*.js', ['js']);
+gulp.task('watch', function() {
+  gulp.watch('./p/src/jade/*.jade', ['jade']);
+  gulp.watch('./p/src/less/*.less', ['less']);
+  gulp.watch('./p/src/es/*.js', ['js']);
+});
+gulp.task('default', ['jade','less','js','watch']);
+gulp.task('apage', ['jade','less','js','watch']);
