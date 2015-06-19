@@ -1,3 +1,9 @@
+/*
+* name: apage
+* version: 0.1.0
+* author: lunix01
+* Copyright (c) 2015
+*/
 var gulp = require('gulp')
 var jade = require('gulp-jade')
 var prettify = require('gulp-prettify');
