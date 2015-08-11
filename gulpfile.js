@@ -6,7 +6,7 @@
 */
 var gulp = require('gulp')
 var jade = require('gulp-jade')
-var prettify = require('gulp-prettify');
+var prettify = require('gulp-html-prettify');
 var less = require('gulp-less')
 var cssmin = require('gulp-minify-css');
 var babel = require("gulp-babel")
