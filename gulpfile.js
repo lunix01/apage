@@ -8,6 +8,7 @@ var gulp = require('gulp')
 var jade = require('gulp-jade')
 var prettify = require('gulp-prettify');
 var less = require('gulp-less')
+var autoprefixer = require('gulp-autoprefixer')
 var cssmin = require('gulp-minify-css');
 var babel = require("gulp-babel")
 var uglify = require('gulp-uglify')
@@ -23,6 +24,10 @@ gulp.task('less', function() {
   return gulp.src('./p/src/less/*.less')
     .pipe(less())
     .pipe(concat('style.css'))
+    .pipe(autoprefixer({
+      browsers: ['last 2 versions'],
+      cascade: false
+    }))
     .pipe(cssmin({compatibility: 'ie8'}))
     .pipe(gulp.dest('./p/build/css/'))
 });
