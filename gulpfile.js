@@ -1,6 +1,6 @@
 /*
 * name: apage
-* version: 0.1.0
+* version: 0.1.1
 * author: lunix01
 * Copyright (c) 2015
 */
@@ -24,11 +24,11 @@ gulp.task('less', function() {
   return gulp.src('./p/src/less/*.less')
     .pipe(less())
     .pipe(concat('style.css'))
+    .pipe(cssmin({compatibility: 'ie8'}))
     .pipe(autoprefixer({
-      browsers: ['last 2 versions'],
+      browsers: ['> 5%'],
       cascade: false
     }))
-    .pipe(cssmin({compatibility: 'ie8'}))
     .pipe(gulp.dest('./p/build/css/'))
 });
 gulp.task('js', function() {
