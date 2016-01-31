@@ -14,13 +14,13 @@ var babel = require("gulp-babel")
 var uglify = require('gulp-uglify')
 var concat = require('gulp-concat')
 
-gulp.task('jade', function() {
+gulp.task('jade', () => {
   return gulp.src('./p/src/jade/*.jade')
     .pipe(jade())
     .pipe(prettify())
     .pipe(gulp.dest('./p/build/html/'))
 });
-gulp.task('less', function() {
+gulp.task('less', () => {
   return gulp.src('./p/src/less/*.less')
     .pipe(less())
     .pipe(concat('style.css'))
@@ -31,14 +31,14 @@ gulp.task('less', function() {
     }))
     .pipe(gulp.dest('./p/build/css/'))
 });
-gulp.task('js', function() {
+gulp.task('js', () => {
   return gulp.src('./p/src/es/*.js')
     .pipe(babel())
     .pipe(concat('app.js'))
     .pipe(uglify())
     .pipe(gulp.dest('./p/build/js'))
 });
-gulp.task('watch', function() {
+gulp.task('watch', () => {
   gulp.watch('./p/src/jade/*.jade', ['jade']);
   gulp.watch('./p/src/less/*.less', ['less']);
   gulp.watch('./p/src/es/*.js', ['js']);
