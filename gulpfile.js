@@ -12,6 +12,7 @@ const autoprefixer = require('gulp-autoprefixer');
 const cssmin = require('gulp-clean-css');
 const babel = require("gulp-babel");
 const uglify = require('gulp-uglify');
+var eslint = require('gulp-eslint');
 const concat = require('gulp-concat');
 const imagemin = require('gulp-imagemin');
 
@@ -45,6 +46,12 @@ gulp.task('js', () => {
     .pipe(uglify())
     .pipe(gulp.dest('./p/build/js'))
 });
+gulp.task('eslint', function() {
+    return gulp.src(paths.js)
+        .pipe(eslint())
+        .pipe(eslint.format())
+        .pipe(eslint.failAfterError());
+});
 gulp.task('image', () => {
   return gulp.src(paths.image)
     .pipe(imagemin())
@@ -54,7 +61,8 @@ gulp.task('watch', () => {
   gulp.watch(paths.jade, ['jade']);
   gulp.watch(paths.less, ['less']);
   gulp.watch(paths.js, ['js']);
+  gulp.watch(paths.js, ['eslint']);
   gulp.watch(paths.image, ['image']);
 });
-gulp.task('default', ['jade', 'less', 'js', 'image', 'watch']);
-gulp.task('apage', ['jade', 'less', 'js', 'image', 'watch']);
+gulp.task('default', ['jade', 'less', 'js', 'eslint', 'image', 'watch']);
+gulp.task('apage', ['jade', 'less', 'js', 'eslint', 'image', 'watch']);
