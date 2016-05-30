@@ -22,44 +22,44 @@ const paths = {
     image: './p/src/images/**/*'
 };
 gulp.task('jade', () => {
-  return gulp.src(paths.jade)
-    .pipe(jade())
-    .pipe(prettify())
-    .pipe(gulp.dest('./p/build/html/'))
+    return gulp.src(paths.jade)
+        .pipe(jade())
+        .pipe(prettify())
+        .pipe(gulp.dest('./p/build/html/'))
 });
 gulp.task('sass', () => {
-  return gulp.src(paths.sass)
-    .pipe(sass().on('error', sass.logError))
-    .pipe(cssmin({compatibility: 'ie8'}))
-    .pipe(autoprefixer({
-      browsers: ['> 5%'],
-      cascade: false
-    }))
-    .pipe(gulp.dest('./p/build/css/'))
+    return gulp.src(paths.sass)
+        .pipe(sass().on('error', sass.logError))
+        .pipe(cssmin({compatibility: 'ie8'}))
+        .pipe(autoprefixer({
+            browsers: ['last 2 versions'],
+            cascade: false
+        }))
+        .pipe(gulp.dest('./p/build/css/'))
 });
 gulp.task('js', () => {
-  return gulp.src(paths.js)
-    .pipe(babel())
-    .pipe(uglify())
-    .pipe(gulp.dest('./p/build/js'))
+    return gulp.src(paths.js)
+        .pipe(babel())
+        .pipe(uglify())
+        .pipe(gulp.dest('./p/build/js'))
 });
-gulp.task('eslint', function() {
+gulp.task('eslint', () => {
     return gulp.src(paths.js)
         .pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failAfterError());
 });
 gulp.task('image', () => {
-  return gulp.src(paths.image)
-    .pipe(imagemin())
-    .pipe(gulp.dest('./p/build/image/'))
+    return gulp.src(paths.image)
+        .pipe(imagemin())
+        .pipe(gulp.dest('./p/build/image/'))
 });
 gulp.task('watch', () => {
-  gulp.watch(paths.jade, ['jade']);
-  gulp.watch(paths.sass, ['sass']);
-  gulp.watch(paths.js, ['js']);
-  gulp.watch(paths.js, ['eslint']);
-  gulp.watch(paths.image, ['image']);
+    gulp.watch(paths.jade, ['jade']);
+    gulp.watch(paths.sass, ['sass']);
+    gulp.watch(paths.js, ['js']);
+    gulp.watch(paths.js, ['eslint']);
+    gulp.watch(paths.image, ['image']);
 });
 gulp.task('default', ['jade', 'sass', 'js', 'eslint', 'image', 'watch']);
 gulp.task('apage', ['jade', 'sass', 'js', 'eslint', 'image', 'watch']);
