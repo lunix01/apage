@@ -1,5 +1,5 @@
 #apage
-构建项目？自动化？一份gulp配置？editorconfig？eslintrc？jade+less+babel？
+构建项目？自动化？一份gulp配置？editorconfig？eslint？jade + sass + babel？
 
 ###bower
 如：bower install apage
