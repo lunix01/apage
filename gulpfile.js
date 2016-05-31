@@ -32,7 +32,7 @@ gulp.task('sass', () => {
         .pipe(sass().on('error', sass.logError))
         .pipe(cssmin({compatibility: 'ie8'}))
         .pipe(autoprefixer({
-            browsers: ['last 2 versions'],
+            browsers: ['last 2 versions', '> 5%'],
             cascade: false
         }))
         .pipe(gulp.dest('./p/build/css/'))
