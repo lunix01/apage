@@ -14,6 +14,7 @@ const babel = require("gulp-babel");
 const uglify = require('gulp-uglify');
 const eslint = require('gulp-eslint');
 const imagemin = require('gulp-imagemin');
+const cache = require('gulp-cache');
 
 const paths = {
     jade: './p/src/jade/**/*.jade',
@@ -51,7 +52,7 @@ gulp.task('eslint', () => {
 });
 gulp.task('image', () => {
     return gulp.src(paths.image)
-        .pipe(imagemin())
+        .pipe(cache(imagemin()))
         .pipe(gulp.dest('./p/build/image/'))
 });
 gulp.task('watch', () => {
