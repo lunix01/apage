@@ -10,7 +10,9 @@ const prettify = require('gulp-prettify');
 const sass = require('gulp-sass');
 const autoprefixer = require('gulp-autoprefixer');
 const cssmin = require('gulp-clean-css');
-const babel = require("gulp-babel");
+const webpack = require('webpack-stream');
+const webpackCfg = require('./webpack.config.js')
+const named = require('vinyl-named');
 const uglify = require('gulp-uglify');
 const eslint = require('gulp-eslint');
 const imagemin = require('gulp-imagemin');
@@ -40,7 +42,8 @@ gulp.task('sass', () => {
 });
 gulp.task('js', () => {
     return gulp.src(paths.js)
-        .pipe(babel())
+        .pipe(named())
+        .pipe(webpack(webpackCfg))
         .pipe(uglify())
         .pipe(gulp.dest('./p/build/js'))
 });
