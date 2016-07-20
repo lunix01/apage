@@ -19,9 +19,9 @@ const imagemin = require('gulp-imagemin');
 const cache = require('gulp-cache');
 
 const paths = {
-    jade: './p/src/jade/**/*.jade',
-    sass: './p/src/sass/**/*.scss',
-    js: './p/src/es/**/*.js',
+    jade: ['./p/src/jade/**/*.jade', './p/src/jade/**/_*.jade'],
+    sass: ['./p/src/sass/**/*.scss', './p/src/sass/**/_*.scss'],
+    js: ['./p/src/es/**/*.js', './p/src/es/**/_*.js'],
     image: './p/src/images/**/*'
 };
 gulp.task('jade', () => {
@@ -61,8 +61,7 @@ gulp.task('image', () => {
 gulp.task('watch', () => {
     gulp.watch(paths.jade, ['jade']);
     gulp.watch(paths.sass, ['sass']);
-    gulp.watch(paths.js, ['js']);
-    gulp.watch(paths.js, ['eslint']);
+    gulp.watch(paths.js, ['js', 'eslint']);
     gulp.watch(paths.image, ['image']);
 });
 gulp.task('default', ['jade', 'sass', 'js', 'eslint', 'image', 'watch']);
