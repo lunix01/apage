@@ -5,6 +5,8 @@
 * Copyright (c) 2015 - 2016
 */
 const gulp = require('gulp');
+const del = require('del');
+const runSequence = require('run-sequence');
 const jade = require('gulp-jade');
 const prettify = require('gulp-prettify');
 const sass = require('gulp-sass');
@@ -24,6 +26,11 @@ const paths = {
     js: ['./p/src/es/**/*.js', '!./p/src/es/**/_*.js'],
     image: './p/src/images/**/*'
 };
+gulp.task('clean', () => {
+    return del(['./p/build/']).then(paths => {
+        console.log('删除：', paths.join('\n'));
+    });
+});
 gulp.task('jade', () => {
     return gulp.src(paths.jade)
         .pipe(jade())
@@ -35,7 +42,7 @@ gulp.task('sass', () => {
         .pipe(sass().on('error', sass.logError))
         .pipe(cssmin({compatibility: 'ie8'}))
         .pipe(autoprefixer({
-            browsers: ['last 2 versions', '> 5%'],
+            browsers: ['last 3 versions', '> 5%'],
             cascade: false
         }))
         .pipe(gulp.dest('./p/build/css/'))
@@ -64,5 +71,12 @@ gulp.task('watch', () => {
     gulp.watch(paths.js, ['js', 'eslint']);
     gulp.watch(paths.image, ['image']);
 });
-gulp.task('default', ['jade', 'sass', 'js', 'eslint', 'image', 'watch']);
-gulp.task('apage', ['jade', 'sass', 'js', 'eslint', 'image', 'watch']);
+gulp.task('default', function(cb) {
+    runSequence(
+        'clean',
+        ['jade', 'sass', 'js', 'eslint', 'image'],
+        'watch',
+        cb
+    );
+});
+gulp.task('apage', ['default']);
