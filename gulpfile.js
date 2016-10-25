@@ -10,7 +10,9 @@ const runSequence = require('run-sequence');
 const jade = require('gulp-jade');
 const prettify = require('gulp-prettify');
 const sass = require('gulp-sass');
-const autoprefixer = require('gulp-autoprefixer');
+const postcss = require('gulp-postcss');
+const autoprefixer = require('autoprefixer');
+const cssnano = require('cssnano');
 const cssmin = require('gulp-clean-css');
 const webpack = require('webpack-stream');
 const webpackCfg = require('./webpack.config.js')
@@ -40,11 +42,7 @@ gulp.task('jade', () => {
 gulp.task('sass', () => {
     return gulp.src(paths.sass)
         .pipe(sass().on('error', sass.logError))
-        .pipe(cssmin({compatibility: 'ie8'}))
-        .pipe(autoprefixer({
-            browsers: ['last 3 versions', '> 5%'],
-            cascade: false
-        }))
+        .pipe(postcss([autoprefixer, cssnano]))
         .pipe(gulp.dest('./p/build/css/'))
 });
 gulp.task('js', () => {
