@@ -13,7 +13,6 @@ const sass = require('gulp-sass');
 const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
-const cssmin = require('gulp-clean-css');
 const webpack = require('webpack-stream');
 const webpackCfg = require('./webpack.config.js')
 const named = require('vinyl-named');
