@@ -74,7 +74,6 @@ gulp.task('watch', () => {
 });
 gulp.task('default', function(cb) {
     runSequence(
-        'clean',
         ['jade', 'sass', 'js', 'eslint', 'image'],
         'watch',
         cb
