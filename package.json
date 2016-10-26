@@ -29,5 +29,9 @@
     "gulp-imagemin": "^3.0.3",
     "gulp-cache": "^0.4.5",
     "run-sequence": "^1.2.2"
+  },
+  "scripts": {
+    "clean": "gulp clean",
+    "build": "gulp"
   }
 }
