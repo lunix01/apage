@@ -41,7 +41,11 @@ gulp.task('jade', () => {
 gulp.task('sass', () => {
     return gulp.src(paths.sass)
         .pipe(sass().on('error', sass.logError))
-        .pipe(postcss([autoprefixer, cssnano]))
+        .pipe(postcss([autoprefixer({
+            browsers: ['last 3 version', '>5%'],
+            cascade: false,
+            remove: false
+        }), cssnano]))
         .pipe(gulp.dest('./p/build/css/'))
 });
 gulp.task('js', () => {
