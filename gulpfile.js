@@ -23,7 +23,7 @@ const imagemin = require('gulp-imagemin');
 const cache = require('gulp-cache');
 
 const paths = {
-    pug: ['./p/src/jade/**/*.pug', '!./p/src/jade/**/_*.pug'],
+    pug: ['./p/src/pug/**/*.pug', '!./p/src/pug/**/_*.pug'],
     sass: ['./p/src/sass/**/*.scss', '!./p/src/sass/**/_*.scss'],
     js: ['./p/src/es/**/*.js', '!./p/src/es/**/_*.js'],
     image: './p/src/images/**/*'
