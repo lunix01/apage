@@ -1,6 +1,6 @@
 /*
 * name: apage
-* version: 0.1.5
+* version: 0.2.0
 * author: lunix01
 * Copyright (c) 2015 - 2018
 */
@@ -17,6 +17,7 @@ const webpack = require('webpack-stream');
 const webpackCfg = require('./webpack.config.js')
 const named = require('vinyl-named');
 const uglify = require('gulp-uglify');
+const pump = require('pump');
 const eslint = require('gulp-eslint');
 const imagemin = require('gulp-imagemin');
 const cache = require('gulp-cache');
@@ -48,12 +49,14 @@ gulp.task('sass', () => {
         }), cssnano]))
         .pipe(gulp.dest('./p/build/css/'))
 });
-gulp.task('js', () => {
-    return gulp.src(paths.js)
-        .pipe(named())
-        .pipe(webpack(webpackCfg))
-        .pipe(uglify())
-        .pipe(gulp.dest('./p/build/js'))
+gulp.task('js', function(cb) {
+    pump([
+        gulp.src(paths.js),
+        named(),
+        webpack(webpackCfg),
+        uglify(),
+        gulp.dest('./p/build/js')
+    ], cb);
 });
 gulp.task('eslint', () => {
     return gulp.src(paths.js)
