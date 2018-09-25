@@ -2,7 +2,7 @@
 * name: apage
 * version: 0.1.5
 * author: lunix01
-* Copyright (c) 2015 - 2016
+* Copyright (c) 2015 - 2018
 */
 const gulp = require('gulp');
 const del = require('del');
@@ -22,7 +22,7 @@ const imagemin = require('gulp-imagemin');
 const cache = require('gulp-cache');
 
 const paths = {
-    jade: ['./p/src/jade/**/*.jade', '!./p/src/jade/**/_*.jade'],
+    pug: ['./p/src/jade/**/*.pug', '!./p/src/jade/**/_*.pug'],
     sass: ['./p/src/sass/**/*.scss', '!./p/src/sass/**/_*.scss'],
     js: ['./p/src/es/**/*.js', '!./p/src/es/**/_*.js'],
     image: './p/src/images/**/*'
@@ -32,7 +32,7 @@ gulp.task('clean', () => {
         console.log('删除：', paths.join('\n'));
     });
 });
-gulp.task('pug', () => {
+gulp.task('pug', function buildHTML() {
     return gulp.src(paths.pug)
         .pipe(pug())
         .pipe(prettify())
