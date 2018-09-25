@@ -1,6 +1,6 @@
 {
   "name": "apage",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "private": true,
   "author": "lunix01",
   "homepage": "https://github.com/lunix01/apage",
@@ -20,6 +20,7 @@
     "vinyl-named": "^1.1.0",
     "@babel/core": "^7.1.0",
     "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.2",
     "gulp-eslint": "^5.0.0",
     "gulp-uglify": "^3.0.1",
