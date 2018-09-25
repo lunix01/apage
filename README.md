@@ -1,5 +1,5 @@
 # apage
-构建项目？自动化？一份gulp配置？editorconfig？eslint？jade + sass + babel？   
+构建项目？自动化？一份gulp+webpack配置？editorconfig？eslint？pug+sass+babel？ 
 
 ## bower
 如：bower install apage   
@@ -14,7 +14,7 @@
 gulpfile.js中，如下：  
 ```
 const paths = {
-    jade: ['./p/src/jade/**/*.jade', '!./p/src/jade/**/_*.jade'],
+    jade: ['./p/src/pug/**/*.pug', '!./p/src/pug/**/_*.pug'],
     sass: ['./p/src/sass/**/*.scss', '!./p/src/sass/**/_*.scss'],
     js: ['./p/src/es/**/*.js', '!./p/src/es/**/_*.js'],
     image: './p/src/images/**/*'
