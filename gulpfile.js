@@ -1,13 +1,13 @@
 /*
 * name: apage
-* version: 0.1.4
+* version: 0.1.5
 * author: lunix01
 * Copyright (c) 2015 - 2016
 */
 const gulp = require('gulp');
 const del = require('del');
 const runSequence = require('run-sequence');
-const jade = require('gulp-jade');
+const pug = require('gulp-pug');
 const prettify = require('gulp-prettify');
 const sass = require('gulp-sass');
 const postcss = require('gulp-postcss');
@@ -32,9 +32,9 @@ gulp.task('clean', () => {
         console.log('删除：', paths.join('\n'));
     });
 });
-gulp.task('jade', () => {
-    return gulp.src(paths.jade)
-        .pipe(jade())
+gulp.task('pug', () => {
+    return gulp.src(paths.pug)
+        .pipe(pug())
         .pipe(prettify())
         .pipe(gulp.dest('./p/build/html/'))
 });
@@ -67,14 +67,14 @@ gulp.task('image', () => {
         .pipe(gulp.dest('./p/build/image/'))
 });
 gulp.task('watch', () => {
-    gulp.watch(paths.jade, ['jade']);
+    gulp.watch(paths.pug, ['pug']);
     gulp.watch(paths.sass, ['sass']);
     gulp.watch(paths.js, ['js', 'eslint']);
     gulp.watch(paths.image, ['image']);
 });
 gulp.task('default', function(cb) {
     runSequence(
-        ['jade', 'sass', 'js', 'eslint', 'image'],
+        ['pug', 'sass', 'js', 'eslint', 'image'],
         'watch',
         cb
     );
