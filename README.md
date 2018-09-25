@@ -5,9 +5,9 @@
 如：bower install apage   
 
 ## 使用：
-在命令窗口中进入到apage目录下，  
-执行npm install，根据package.json安装所需模块插件。  
-然后，执行npm run build运行。   
+在命令窗口中进入到apage目录下，执行npm install，根据package.json安装所需模块插件。  
+然后，执行npm run build运行。  
+说明：node-v8.12.0安装package时报npm ERR! asyncWrite is not a function错误，请降级node版本，测试node-v7.9.0通过。
 
 ## 注意：
 请根据项目结构情况更改配置。  
